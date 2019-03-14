@@ -1,0 +1,60 @@
+{
+  "name": "react-kekkai-example",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Tabacotaco",
+  "description": "react-kekkai demo case",
+  "main": "docs/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --watch --open --mode development",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/Tabacotaco/react-kekkai-example#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tabacotaco/react-kekkai-example.git"
+  },
+  "keywords": [
+    "react",
+    "react-kekkai",
+    "demo",
+    "example"
+  ],
+  "bugs": {
+    "url": "https://github.com/Tabacotaco/react-kekkai-example/issues"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "moment": "^2.24.0",
+    "numeral": "^2.0.6",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-kekkai": "^0.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.3.4",
+    "autoprefixer": "^9.4.10",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
+    "cssnano": "^4.1.10",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^3.0.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.11.0",
+    "path": "^0.12.7",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
+  }
+}

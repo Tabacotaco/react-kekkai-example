@@ -1,0 +1,10 @@
+div.app {
+  padding: 12px;
+
+  & > header.form-inline > div.form-group {
+    & > .form-control {
+      width: 180px;
+      margin-right: 8px;
+    }
+  }
+}
