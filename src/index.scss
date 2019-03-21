@@ -2,9 +2,21 @@ div.app {
   padding: 12px;
 
   & > header.form-inline > div.form-group {
+    margin: 0 !important;
+
     & > .form-control {
       width: 180px;
       margin-right: 8px;
+      display: inline-block;
+      vertical-align: middle;
     }
+  }
+
+  button.link-btn {
+    border: none!important;
+    background: none!important;
+    box-shadow: none!important;
+    outline: none!important;
+    vertical-align: middle;
   }
 }
