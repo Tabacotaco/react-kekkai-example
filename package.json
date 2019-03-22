@@ -30,7 +30,7 @@
     "numeral": "^2.0.6",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-kekkai": "file:../react-kekkai"
+    "react-kekkai": "^0.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
