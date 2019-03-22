@@ -5,10 +5,16 @@ div.app {
     margin: 0 !important;
 
     & > .form-control {
-      width: 180px;
       margin-right: 8px;
       display: inline-block;
       vertical-align: middle;
+
+      &.mode {
+        width: 90px;
+      }
+      &.layout {
+        width: 140px;
+      }
     }
   }
 

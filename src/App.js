@@ -14,11 +14,23 @@ import 'react-kekkai/dist/index.css';
 
 
 export default class App extends Component {
+  static darkCSS = { background: '#343a40', color: '#fff' };
+  static lightCSS = { background: '#f8f9fa', color: '#212529' };
+
+  static darkKekkai = { bgColor: '#ffc107', txColor: '#212529' };
+  static lightKekkai = { bgColor: '#0069d9', txColor: '#fff' };
 
   state = {
     panel: 'List',
+    darkMode: false,
     searchable: false
   };
+
+  set mainTheme(value) {
+    const $body = document.body;
+
+    Object.keys(value).forEach(key => $body.style[key] = value[key]);
+  }
 
   // TODO: Kekkai Todo - 定義資料可操作動作
   get todos() {
@@ -123,6 +135,10 @@ export default class App extends Component {
     this.setState({ panel: value });
   };
 
+  onModeChange = ({ target: { value } }) => {
+    this.setState({ darkMode: 'dark' === value });
+  };
+
   onSearch = () => this.setState({ searchable: true }, () =>
     // FIXME: 透過 ref 取得 <KekkaiContainer />, 並呼叫 method 執行查詢
     this.refs.budgetapply.doSearch()
@@ -159,13 +175,22 @@ export default class App extends Component {
   };
 
   render() {
-    const { panel } = this.state;
+    const { panel, darkMode } = this.state;
+    const mainCSS = App[darkMode ? 'darkCSS' : 'lightCSS'];
+    const kekkaiCSS = App[darkMode ? 'darkKekkai' : 'lightKekkai'];
+
+    this.mainTheme = mainCSS;
 
     return (
       <div className="app">
         <header className="form-inline">
           <div className="form-group">
-            <select className="form-control" value={panel} onChange={this.onPanelChange}>
+            <select className="form-control mode" value={darkMode ? 'dark' : 'light'} onChange={this.onModeChange}>
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
+            </select>
+
+            <select className="form-control layout" value={panel} onChange={this.onPanelChange}>
               <option value="List">List 資料條列</option>
               <option value="Form">Form 單筆表單</option>
               <option value="Card">Card 多筆表單</option>
@@ -177,17 +202,16 @@ export default class App extends Component {
           </div>
         </header>
 
-        <hr />
+        <hr style={{ borderColor: mainCSS.color }} />
 
         <KekkaiContainer ref="budgetapply" {...{
           panel: LayoutOpts[panel],
-          toolBgColor: '#007bff',
-          toolTxColor: 'white',
           loadingMask: true,
           pageSize: 10,
           todos: this.todos,
           getSearchResponse: this.getSearchResponse,
-          onCommit: this.onCommit
+          onCommit: this.onCommit,
+          ...kekkaiCSS
         }} view={(data) => (
           <KekkaiDataview key={data.$uid} {...{
             dataModel: data,
@@ -221,7 +245,7 @@ export default class App extends Component {
               <KekkaiDisplay>{numeral(data.amount).format('0,0')}</KekkaiDisplay>
 
               <KekkaiEditor required={true} onChange={(name, value, dataModel) => console.log('on change', name, value, dataModel)}>
-                <input type="number" />
+                <input type="number" className="form-control" />
               </KekkaiEditor>
             </KekkaiField>
 
@@ -229,7 +253,7 @@ export default class App extends Component {
               <KekkaiEditor required={true} validation={(value, data) =>
                 !value || value.length < 1 || value.length > 20 ? '申請人員僅允許輸入 1 ~ 20 個字碼.' : true
               }>
-                <input type="text" />
+                <input type="text" className="form-control" />
               </KekkaiEditor>
             </KekkaiField>
 
@@ -237,7 +261,7 @@ export default class App extends Component {
               <KekkaiEditor editable={(value, data) =>
                 'string' === typeof data.applyUser && data.applyUser.trim().length > 0
               }>
-                <input type="text" />
+                <input type="text" className="form-control" />
               </KekkaiEditor>
             </KekkaiField>
 
