@@ -14,8 +14,8 @@ import 'react-kekkai/dist/index.css';
 
 
 export default class App extends Component {
-  static darkCSS = { background: '#343a40', color: '#fff' };
-  static lightCSS = { background: '#f8f9fa', color: '#212529' };
+  static darkCSS = { background: '#343a40', color: '#fff', borderColor: '#fff' };
+  static lightCSS = { background: '#f8f9fa', color: '#212529', borderColor: '#d6d8db' };
 
   static darkKekkai = { bgColor: '#ffc107', txColor: '#212529' };
   static lightKekkai = { bgColor: '#0069d9', txColor: '#fff' };
@@ -202,7 +202,7 @@ export default class App extends Component {
           </div>
         </header>
 
-        <hr style={{ borderColor: mainCSS.color }} />
+        <hr style={{ borderColor: mainCSS.borderColor }} />
 
         <KekkaiContainer ref="budgetapply" {...{
           panel: LayoutOpts[panel],

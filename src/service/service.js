@@ -35,22 +35,28 @@ function doSort(list, sorts) {
 }
 
 export async function getBudgetData({ conditions = {}, sorts = [], pageSize = 10, skipCount = 0 }) {
-  console.log(' filters: ', conditions);
-  console.log('   sorts: ', sorts);
-
-  return await (new Promise(resolve => {
+  return await (new Promise(resolve => setTimeout(() => {
     const content = doSort(
       json.filter(data => isFilterMapping(data, conditions)),
       sorts
     );
 
-    setTimeout(() => resolve({
+    resolve({
       content: content.slice(skipCount, skipCount + pageSize),
       totalCount: content.length
-    }), 1000);
-  }));
+    });
+  })));
 }
 
 export async function doCommitBudget({ modifieds = [], removes = [] }) {
-  console.log(modifieds, removes);
+  return await (new Promise(resolve => setTimeout(() => {
+    const creates = modifieds.filter(data => data.$isNew);
+    const updates = modifieds.filter(data => !data.$isNew);
+  
+    creates.forEach(data => json.push(data.$json));
+    updates.forEach(data => json.splice(json.findIndex(({ id }) => id === data.id), 1, data.$json));
+    removes.forEach(data => json.splice(json.findIndex(({ id }) => id === data.id), 1));
+  
+    resolve({ success: true, msg: '' });
+  }, 800)));
 }
