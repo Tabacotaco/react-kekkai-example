@@ -4,22 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: {
-    'index': './src/index.js'
-  },
+  devServer: { port: 4000 },
+  entry: { 'index': './src/index.js' },
   output: {
     path: path.resolve(__dirname, 'docs'),
     filename: '[name].js'
-  },
-  resolve: {
-    extensions: [
-      '.jsx', '.js', '.scss', '.css', '.json'
-    ],
-    alias: {
-      react: path.resolve('./node_modules/react'),
-      moment: path.resolve('./node_modules/moment'),
-      numeral: path.resolve('./node_modules/numeral')
-    }
   },
   plugins: [
     new ExtractTextPlugin({
@@ -56,8 +45,5 @@ module.exports = {
         }
       }]
     }]
-  },
-  devServer: {
-    port: 4000
   }
 };
